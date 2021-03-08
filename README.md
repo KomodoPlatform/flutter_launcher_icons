@@ -9,55 +9,39 @@ A command-line tool which simplifies the task of updating your Flutter app's lau
 
 ## :sparkles: What's New
 
-#### Version 0.7.4 (28th Oct 2019)
+#### Version 0.9.0 (28th Feb 2021)
 
-- Worked on suggestions from [pub.dev](https://pub.dev/packages/flutter_launcher_icons#-analysis-tab-)
+- Null-safety support added (thanks to @SteveAlexander)
+- Added option to remove alpha channel for iOS icons (thanks to @SimonIT)
 
-#### Version 0.7.3 (3rd Sept 2019)
- * Lot of refactoring and improving code quality (thanks to @connectety)
- * Added correct App Store icon settings (thanks to @richgoldmd)
+#### Version 0.8.1 (2nd Oct 2020)
 
-#### Version 0.7.2 (25th May 2019)
- * Reverted back using old interpolation method
+- Fixed flavor support on windows (@slightfoot)
 
-#### Version 0.7.1 (24th May 2019)
- * Fixed issue with image dependency not working on latest version of Flutter (thanks to @sboutet06)
- * Fixed iOS icon sizes which were incorrect (thanks to @sestegra)
- * Removed dart_config git dependency and replaced with yaml dependency 
+#### Version 0.8.0 (12th Sept 2020)
 
-#### Version 0.7.0 (22nd November 2018)
- * Added check to ensure the Android file name is valid
- * Fixed issue where there was a git diff when there was no change
- * Fixed issue where iOS icon would be generated when it shouldn't be
- * Added support for drawables to be used for adaptive icon backgrounds
- * Added support for Flutter Launcher Icons to be able to run with it's own config file (no longer necessary to add to pubspec.yaml)
+- Added flavours support (thanks to @sestegra & @jorgecoca)
+- Removed unassigned iOS icons (thanks to @melvinsalas)
+- Fixing formatting (thanks to @mreichelt)
 
-#### Version 0.6.1 (26th August 2018)
- * Upgraded dependencies so that it should now work with Dart 2.1.0
-
-#### Version 0.6.0 (8th August 2018)
- * Moved the package to [Flutter Community](https://github.com/fluttercommunity/community)
-
-#### Version 0.5.0 (12th June 2018)
- * [Android] Support for adaptive icons added
-
+Want to see older changes? Be sure to check out the [Changelog](https://github.com/fluttercommunity/flutter_launcher_icons/blob/master/CHANGELOG.md).
 
 ## :book: Guide
 
 #### 1. Setup the config file
 
-Add your Flutter Launcher Icons configuration to your `pubspec.yaml` or create a new config file called `flutter_launcher_icons.yaml`. 
-An example is shown below. A more complex example [can be found in the example project](https://github.com/fluttercommunity/flutter_launcher_icons/blob/master/example/pubspec.yaml).
+Add your Flutter Launcher Icons configuration to your `pubspec.yaml` or create a new config file called `flutter_launcher_icons.yaml`.
+An example is shown below. More complex examples [can be found in the example projects](https://github.com/fluttercommunity/flutter_launcher_icons/tree/master/example).
 ```yaml
-dev_dependencies: 
-  flutter_launcher_icons: "^0.7.3"
-  
+dev_dependencies:
+  flutter_launcher_icons: "^0.9.0"
+
 flutter_icons:
-  android: "launcher_icon" 
+  android: "launcher_icon"
   ios: true
   image_path: "assets/icon/icon.png"
 ```
-If you name your configuration file something other than `flutter_launcher_icons.yaml` or `pubspec.yaml` you will need to specify 
+If you name your configuration file something other than `flutter_launcher_icons.yaml` or `pubspec.yaml` you will need to specify
 the name of the file when running the package.
 
 ```
@@ -79,7 +63,7 @@ flutter pub run flutter_launcher_icons:main
 If you encounter any issues [please report them here](https://github.com/fluttercommunity/flutter_launcher_icons/issues).
 
 
-In the above configuration, the package is setup to replace the existing launcher icons in both the Android and iOS project 
+In the above configuration, the package is setup to replace the existing launcher icons in both the Android and iOS project
 with the icon located in the image path specified above and given the name "launcher_icon" in the Android project and "Example-Icon" in the iOS project.
 
 
@@ -92,7 +76,7 @@ Shown below is the full list of attributes which you can specify within your Flu
   - `false`: Ignore making launcher icons for this platform
   - `icon/path/here.png`: This will generate a new launcher icons for the platform with the name you specify, without removing the old default existing Flutter launcher icon.
 
-- `image_path`: The location of the icon image file which you want to use as the app launcher icon 
+- `image_path`: The location of the icon image file which you want to use as the app launcher icon
 
 - `image_path_android`: The location of the icon image file specific for Android platform (optional - if not defined then the image_path is used)
 
@@ -102,11 +86,18 @@ _Note: iOS icons should [fill the entire image](https://stackoverflow.com/questi
 
 The next two attributes are only used when generating Android launcher icon
 
-- `adaptive_icon_background`: The color (E.g. `"#ffffff"`) or image asset (E.g. `"assets/images/christmas-background.png"`) which will 
-be used to fill out the background of the adaptive icon. 
+- `adaptive_icon_background`: The color (E.g. `"#ffffff"`) or image asset (E.g. `"assets/images/christmas-background.png"`) which will
+be used to fill out the background of the adaptive icon.
 
 - `adaptive_icon_foreground`: The image asset which will be used for the icon foreground of the adaptive icon
 
+## Flavor support
+
+Create a Flutter Launcher Icons configuration file for your flavor. The config file is called `flutter_launcher_icons-<flavor>.yaml` by replacing `<flavor>` by the name of your desired flavor.
+
+The configuration file format is the same.
+
+An example project with flavor support enabled [has been added to the examples](https://github.com/fluttercommunity/flutter_launcher_icons/tree/master/example/flavors).
 
 ## :question: Troubleshooting
 
@@ -115,7 +106,7 @@ Listed a couple common issues with solutions for them
 
 #### Generated icon color is different from the original icon
 
-Caused by an update to the image dependency which is used by Flutter Launcher Icons. 
+Caused by an update to the image dependency which is used by Flutter Launcher Icons.
 
 ```
 Use #AARRGGBB for colors instead of ##AABBGGRR, to be compatible with Flutter image class.
@@ -129,15 +120,14 @@ Use #AARRGGBB for colors instead of ##AABBGGRR, to be compatible with Flutter im
 For best results try and use a foreground image which has padding much like [the one in the example](https://github.com/fluttercommunity/flutter_launcher_icons/blob/master/example/assets/images/icon-foreground-432x432.png).
 
 [Related issue](https://github.com/fluttercommunity/flutter_launcher_icons/issues/96)
- 
 
 ## :eyes: Example
 
-[![Video Example](https://img.youtube.com/vi/RjNAxwcP3Tc/0.jpg)](https://www.youtube.com/watch?v=RjNAxwcP3Tc)
+[![Video Example](https://i.imgur.com/R28hqdz.png)](https://www.youtube.com/watch?v=RjNAxwcP3Tc)
 
 Note: This is showing a very old version (v0.0.5)
 
 ### Special thanks
 
-- Thanks to Brendan Duncan for the underlying [image package](https://pub.dev/packages/image) to transform the icons. 
-- Big thank you to all the contributors to the project. Every PR / reported issue is greatly appreciated! 
+- Thanks to Brendan Duncan for the underlying [image package](https://pub.dev/packages/image) to transform the icons.
+- Big thank you to all the contributors to the project. Every PR / reported issue is greatly appreciated!
